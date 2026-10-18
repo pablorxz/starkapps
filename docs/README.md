@@ -1,12 +1,18 @@
 # Documentación general de StarkApps
 
-Las reglas y el stack predeterminado están en [CLAUDE.md](../CLAUDE.md). Aquí se mantienen procedimientos, estructura y referencias compartidas.
+Las reglas y el stack predeterminado están en [AGENTS.md](../AGENTS.md). Aquí se mantienen procedimientos, estructura y referencias compartidas.
 
-Repositorio fuente: [pablorxz/starkapps](https://github.com/pablorxz/starkapps). El procedimiento para actualizar las instrucciones está en la sección **Mantenimiento de esta base** del `CLAUDE.md`.
+Repositorio fuente: [pablorxz/starkapps](https://github.com/pablorxz/starkapps). El procedimiento para actualizar las instrucciones está en la sección **Mantenimiento de esta base** del `AGENTS.md`.
 
 ## Estado actual
 
-Solo hay instrucciones y documentación. `apps/` y `.claude/skills/` contienen únicamente un `.gitkeep` vacío para conservarlas en Git; esta preparación no instala dependencias ni configura aplicaciones. Cuando se cree una, actualiza esta sección con enlaces a sus instrucciones y documentación.
+Solo hay instrucciones y documentación. `apps/` y `.agents/skills/` contienen únicamente un `.gitkeep` vacío para conservarlas en Git; esta preparación no instala dependencias ni configura aplicaciones. Cuando se cree una, actualiza esta sección con enlaces a sus instrucciones y documentación.
+
+## Claude Code y Codex
+
+`AGENTS.md` es la única fuente de instrucciones compartidas. Codex lo carga de forma nativa; `CLAUDE.md` contiene solo `@AGENTS.md`, una importación que Claude Code admite sin enlaces simbólicos ni configuración personal. Edita siempre el archivo canónico.
+
+Inicia el agente desde la raíz para tareas generales o desde `apps/<nombre>/` para una aplicación. Cada futura app tendrá su propio `AGENTS.md` y un `CLAUDE.md` con la misma importación local; no copies las reglas comunes. Para comprobar la carga, consulta `/context` en Claude y pide a Codex que identifique las instrucciones aplicables. Esta base no modifica ajustes globales de los agentes.
 
 ## Entorno y ejecución
 
@@ -26,7 +32,8 @@ Ejemplo orientativo para Wails, no una lista de carpetas que deban crearse vací
 
 ```text
 apps/<nombre>/
-├── CLAUDE.md
+├── AGENTS.md               # Propósito, alcance y reglas particulares
+├── CLAUDE.md               # Solo @AGENTS.md
 ├── docs/
 │   └── README.md
 ├── main.go
@@ -51,7 +58,7 @@ apps/<nombre>/
 
 En Go, separa primero archivos dentro de un paquete; extrae otro paquete cuando tenga responsabilidad propia. En una app de navegador se omiten los archivos de Wails. `cmd/` puede servir para varios ejecutables, pero no es obligatorio.
 
-El `CLAUDE.md` de la aplicación explica propósito, alcance, modalidad, restricciones y excepciones, con referencia a `../../CLAUDE.md`. Su `docs/README.md` reúne secciones de desarrollo/verificación, implementación, diseño, datos y decisiones/limitaciones, conforme exista contenido útil. No repitas el propósito ni copies esquemas o listas de dependencias que ya mantiene el código.
+El `AGENTS.md` de la aplicación explica propósito, alcance, modalidad, restricciones y excepciones, con referencia a `../../AGENTS.md`. Las reglas particulares se aplican dentro de esa app; las comunes se heredan de la raíz. Su `docs/README.md` reúne secciones de desarrollo/verificación, implementación, diseño, datos y decisiones/limitaciones, conforme exista contenido útil. No repitas el propósito ni copies esquemas o listas de dependencias que ya mantiene el código.
 
 Las decisiones de diseño particulares incluyen tema, tipografías, ajustes compartidos y enlaces a los patrones oficiales consultados. El conocimiento útil para varias aplicaciones se integra aquí; el específico permanece en su app.
 
@@ -72,7 +79,9 @@ Para respaldar, obtén una copia consistente de SQLite mediante su API de respal
 
 ## Skills
 
-Usa `.claude/skills/<nombre>/SKILL.md` para una futura skill compartida, o la misma estructura dentro de una app si es exclusiva. Por ahora solo contiene el marcador `.gitkeep`. Una skill aporta un procedimiento reutilizable, sin duplicar instrucciones ni documentación. No se necesita otra carpeta `skills/` paralela.
+Usa `.agents/skills/<nombre>/SKILL.md` para una futura skill compartida, o la misma estructura dentro de una app si es exclusiva. Por ahora solo contiene el marcador `.gitkeep`. Cada skill tendrá metadatos `name` y `description`, instrucciones y, solo si hacen falta, recursos relativos a su carpeta. Una skill aporta un procedimiento reutilizable, sin duplicar reglas ni documentación.
+
+Codex descubre `.agents/skills/` automáticamente desde la carpeta de trabajo hasta la raíz del repositorio. Claude Code descubre nativamente `.claude/skills/`, no `.agents/skills/`: aquí consulta las skills compartidas mediante la instrucción de `AGENTS.md`, sin prometer comandos `/nombre` automáticos. Si una futura skill necesita ese descubrimiento nativo en Claude, añade entonces un adaptador mínimo en `.claude/skills/<nombre>/SKILL.md` con metadatos y una referencia al archivo canónico, sin copiar su procedimiento. No crees adaptadores ni carpetas exclusivas de un agente por anticipado.
 
 ## Referencias oficiales
 
@@ -81,4 +90,5 @@ Usa `.claude/skills/<nombre>/SKILL.md` para una futura skill compartida, o la mi
 - Datos: [modernc.org/sqlite](https://pkg.go.dev/modernc.org/sqlite), [proveedor Goose](https://pressly.github.io/goose/documentation/provider/), [respaldo SQLite](https://www.sqlite.org/backup.html) y [carpetas Windows](https://learn.microsoft.com/en-us/windows/win32/shell/knownfolderid).
 - UI: [shadcn-svelte](https://www.shadcn-svelte.com/docs) y [Vite](https://www.shadcn-svelte.com/docs/installation/vite).
 - Vercel: [Geist](https://vercel.com/geist/introduction), [colores](https://vercel.com/geist/colors), [tipografía](https://vercel.com/geist/typography), [fuentes](https://vercel.com/font) y [Web Interface Guidelines](https://vercel.com/design/guidelines).
-- Claude Code: [skills](https://code.claude.com/docs/en/skills).
+- Codex: [AGENTS.md](https://learn.chatgpt.com/docs/agent-configuration/agents-md) y [skills](https://learn.chatgpt.com/docs/build-skills).
+- Claude Code: [importar AGENTS.md](https://code.claude.com/docs/en/memory#share-one-file-with-other-coding-tools) y [skills](https://code.claude.com/docs/en/skills).

@@ -2,6 +2,8 @@
 .env
 .env.*
 !.env.example
+**/CLAUDE.local.md
+**/.claude/settings.local.json
 
 # Datos de las aplicaciones y registros locales
 **/data/
