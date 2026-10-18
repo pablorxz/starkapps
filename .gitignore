@@ -1,0 +1,13 @@
+# Secretos y configuración local
+.env
+.env.*
+!.env.example
+
+# Datos de las aplicaciones y registros locales
+**/data/
+*.log
+
+# Dependencias y resultados de compilación
+**/node_modules/
+**/frontend/dist/
+**/build/bin/
