@@ -55,5 +55,5 @@ Base para aplicaciones locales, ligeras y con poco consumo de RAM. Responde en e
 
 ## Mantenimiento de esta base
 
-- El repositorio fuente del scaffolding es [pablorxz/stark-apps](https://github.com/pablorxz/stark-apps). Consúltalo para revisar la versión y los cambios de las instrucciones compartidas.
+- El repositorio fuente del scaffolding es [pablorxz/starkapps](https://github.com/pablorxz/starkapps). Consúltalo para revisar la versión y los cambios de las instrucciones compartidas.
 - Cuando se solicite actualizar esta base, compara el contenido local con el repositorio y adapta las secciones correspondientes de `CLAUDE.md` y `docs/README.md`, preservando las decisiones particulares de cada aplicación. Si la tarea incluye publicar, sincroniza los cambios con ese repositorio tras revisar el diff.

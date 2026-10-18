@@ -2,7 +2,7 @@
 
 Las reglas y el stack predeterminado están en [CLAUDE.md](../CLAUDE.md). Aquí se mantienen procedimientos, estructura y referencias compartidas.
 
-Repositorio fuente: [pablorxz/stark-apps](https://github.com/pablorxz/stark-apps). El procedimiento para actualizar las instrucciones está en la sección **Mantenimiento de esta base** del `CLAUDE.md`.
+Repositorio fuente: [pablorxz/starkapps](https://github.com/pablorxz/starkapps). El procedimiento para actualizar las instrucciones está en la sección **Mantenimiento de esta base** del `CLAUDE.md`.
 
 ## Estado actual
 
